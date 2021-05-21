@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Styles from './image-banner.module.scss';
 import ImageBannerProps from './dto';
 
@@ -10,19 +11,21 @@ export const ImageBanner: FC<ImageBannerProps> = ({
 	const [hover, setHoverEffect] = useState<boolean>(false);
 
 	return (
-		<div
-			className={`${Styles.bannerContainer} ${
-				imageURL ? '' : `${Styles.noImage}`
-			} ${hover ? `${Styles.active}` : ''}`}
-			onMouseEnter={() => setHoverEffect(true)}
-			onMouseLeave={() => setHoverEffect(false)}
-		>
-			<div className={Styles.bannerImage}>
-				{imageURL && <img src={imageURL} alt='' />}
+		<Link to={linkTo}>
+			<div
+				className={`${Styles.bannerContainer} ${
+					imageURL ? '' : `${Styles.noImage}`
+				} ${hover ? `${Styles.active}` : ''}`}
+				onMouseEnter={() => setHoverEffect(true)}
+				onMouseLeave={() => setHoverEffect(false)}
+			>
+				<div className={Styles.bannerImage}>
+					{imageURL && <img src={imageURL} alt='' />}
+				</div>
+				<div className={Styles.bannerText}>
+					<h3>{title}</h3>
+				</div>
 			</div>
-			<div className={Styles.bannerText}>
-				<h3>{title}</h3>
-			</div>
-		</div>
+		</Link>
 	);
 };
